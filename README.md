@@ -11,6 +11,7 @@
 -关于epub<br>
 因为esj书籍网页排版不统一，图片有可能会在每章/每段结束的地方，不一定在准确的地方，毕竟有些章节上传上去的时候排版会很离谱<br>
 然后esj插图栏因为不在章节内，也没写是在哪章，所以我就丢目录简介旁边了<br>
-还有有些esj章节点进去会转到贴吧或者真白轻国等等，这些全部都没排（有些比较离谱的，200多章就两章发在esj域内，就离谱）
- 
+还有有些esj章节点进去会转到贴吧或者真白轻国等等，这些全部都没排（有些比较离谱的，200多章就两章发在esj域内，就离谱）<br>
+<br>
+<a href="https://mega.nz/folder/uFwTxSxR#E2MoflyOjO_zdJcv3wSa4Q">https://mega.nz/folder/uFwTxSxR#E2MoflyOjO_zdJcv3wSa4Q<a>
  
