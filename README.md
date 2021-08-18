@@ -14,7 +14,7 @@
 不过有些esj章节点进去会转到贴吧或者真白轻国等等，这些全部都没排<br>
 （有些比较离谱的，200多章就两章发在esj域内，emm, 导致epub点进去就两章，举个例子比如暗影）<br>
 最后的话部分书本来就没章节所以epub多半只有一个cover<br>
-（还有关于繁简，opencc慢到离天下之大谱，我回头换其他的试试）
+（还有关于繁简，opencc慢到离天下之大谱，我回头换其他的试试）<br>
 <br>
 mega : <a href="https://mega.nz/folder/uFwTxSxR#E2MoflyOjO_zdJcv3wSa4Q">https://mega.nz/folder/uFwTxSxR#E2MoflyOjO_zdJcv3wSa4Q</a><br>
 坚果 ：<a herf="https://www.jianguoyun.com/p/DUCOb94QxPWFCBids4cE">https://www.jianguoyun.com/p/DUCOb94QxPWFCBids4cE (访问密码：s8PnZy)</a>
