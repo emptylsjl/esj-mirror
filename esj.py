@@ -10,9 +10,10 @@ import re
 from bs4 import BeautifulSoup
 import epub
 
+chrome_header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"}
+        
 def link_html_get(target_url):
     try:
-        chrome_header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"}
         web_request = requests.get(target_url, headers=chrome_header, timeout=60)
         return web_request.text
     except:
