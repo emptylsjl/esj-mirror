@@ -8,7 +8,7 @@ import urllib3
 import time
 import re
 from bs4 import BeautifulSoup
-from cur import epub
+import epub
 
 def link_html_get(target_url):
     try:
