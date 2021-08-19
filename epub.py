@@ -50,7 +50,7 @@ def epub_img_write(file_path: str, content_name_dict: dict):
 
 
 def epub_container() -> str:
-    container_xml = '<?xml version="1.0" encoding="UTF-8"?>\n<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">\n    <rootfiles>\n'        <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>\n'   </rootfiles>\n'</container>'
+    container_xml = '<?xml version="1.0" encoding="UTF-8"?>\n<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">\n    <rootfiles>\n        <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>\n   </rootfiles>\n</container>'
     return container_xml
 
 
@@ -224,8 +224,7 @@ def epub_chap_main_text(main_content_tuple: tuple, div_class: str) -> str:
 
 
 def epub_content_cover(content_name_dict: dict) -> str:
-    text = '<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.lls.org/2007/ops" xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="zh-CN">\n<head>\n    <link href="../Styles/style.css" rel="stylesheet" type="Text/css"/>\n    <title>Cover</title>\n</head>\n\n'
-    text += '<body>\n    <div style="text-align: center; padding: 0pt; margin: 0pt;">\n        <svg xmlns="http://www.w3.org/2000/svg" height="100%" preserveAspectRatio="xMidYMid meet" version="1.1" viewBox="0 0 1804 2560" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink">\n            <image width="1804" height="2560" xlink:href="../Images/cover.jpg"/>\n        </svg>\n   </div>\n'
+    text = '<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.lls.org/2007/ops" xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="zh-CN">\n<head>\n    <link href="../Styles/style.css" rel="stylesheet" type="Text/css"/>\n    <title>Cover</title>\n</head>\n\n<body>\n    <div style="text-align: center; padding: 0pt; margin: 0pt;">\n        <svg xmlns="http://www.w3.org/2000/svg" height="100%" preserveAspectRatio="xMidYMid meet" version="1.1" viewBox="0 0 1804 2560" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink">\n            <image width="1804" height="2560" xlink:href="../Images/cover.jpg"/>\n        </svg>\n   </div>\n'
     try:
         text += '    <div class="title" style="margin: 5em 0em;">\n        <p class="h2" style="margin: 0;">' + content_name_dict['content_info']['title'] + '</p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06">author／</span><span class="tbox">' + content_name_dict['content_info']['author'] + '</span></p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06">illus／</span><span class="tbox">' + illus + '</span></p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06">' + date_creation.__str__() + '</span></p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06"><a href="' + content_name_dict['content_info']['raw_url'] + ">' + content_name_dict['content_info']['raw_url'] + '</a></span></p>\n    </div>\n'
         intro = ''
