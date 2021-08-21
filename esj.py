@@ -1,17 +1,13 @@
 import os
-import shutil
 import sys
-import requests
-import json
-import urllib
-import urllib3
 import time
-import re
+import requests
 from bs4 import BeautifulSoup
 import epub
 
-chrome_header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"}
-        
+chrome_header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"}
+
+
 def link_html_get(target_url):
     try:
         web_request = requests.get(target_url, headers=chrome_header, timeout=60)
@@ -54,7 +50,7 @@ def esj_get(c_dict, html, path):
             main_chap_list.append([i.text])
         else:
             c_dict['content_info']['out_esj'].append(i.attrs["href"])
-            print(i.attrs["href"])
+            print('此章节不在esj域内 : ', i.attrs["href"])
     img_cover_link = e_soup.select(".product-gallery > a > img")[0].attrs['src']
     img_cover_byte = requests.get(img_cover_link).content
     try:
@@ -66,7 +62,6 @@ def esj_get(c_dict, html, path):
                 ["esj_main_img" + str(img_index) + '.jpg', 'jpeg', esj_img_link, esj_img_byte])
             img_index += 1
     except:
-        print("esj_img error")
         print(sys.exc_info()[1])
     img_index = 1
     index = 0
@@ -107,7 +102,6 @@ def esj_get(c_dict, html, path):
                     raise Exception
             except:
                 try:
-                    # print(j)
                     main_contents_chap_text.append(["unknown", j.text])
                 except:
                     print(i)
@@ -115,7 +109,7 @@ def esj_get(c_dict, html, path):
         main_chap_list[index].append(main_contents_chap_text)
         index += 1
         try:
-            print(index, " - ", main_chap_list[index-1][0], " - ", main_contents_chap_text[0])
+            print(index, " - ", main_chap_list[index-1][0])
         except:
             print(sys.exc_info()[1])
             print(main_contents_chap_text)
@@ -140,11 +134,11 @@ def esj_get(c_dict, html, path):
                     txt_content += j[1] + '\n'
             txt_content += "\n" + "\n" + "\n"
     c_dict["content_txt"] = txt_content
-    print(len(c_dict["content_main"]), " - ", len(main_chap_list))
+
     return c_dict
 
 
-def build():
+def build(url):
     try:
         s_t = time.time()
 
@@ -170,19 +164,27 @@ def build():
         c_dict['content_info']['publisher'] = '...'
         c_dict['content_info']['source'] = '...'
         c_dict['content_info']['language'] = 'zh_CN'
-        target_url = input("url : ")
         path = input("write to : ")
-        html = link_html_get(target_url)
+        html = link_html_get(url)
         if "alert('此小說可能已被下架或刪除!')" in html:
-            print("已被下架 - " + target_url)
+            print("已被下架 - " + url)
             return
         c_dict = esj_get(c_dict, html, path)
         title = c_dict['content_info']['title']
         book_path = path + title + "/"
         epub.build(c_dict, book_path)
+        print("esj域内总章节数 : ", len(c_dict["content_main"])-1)
+        print("esj域外章节数 : ", len(c_dict['content_info']['out_esj']))
+        print("complete")
         print("--- %s seconds ---" % (time.time() - s_t))
 
     except:
         print(sys.exc_info()[1])
 
-build()
+
+while True:
+    target_url = input("esj url : ")
+    if target_url == 'exit':
+        print("abort")
+        break
+    build(target_url)
