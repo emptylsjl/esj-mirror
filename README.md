@@ -5,7 +5,8 @@
 ~~（当然如果电脑里装了7z可以把 epub_7z() 那里取消注释， 就自动拍成epub了）~~<br>
 
 现在加release了，zip解压里面有esj.exe, 点了以后会有终端，输入esj网站和电脑路径就行<br>
-（如果你终端不支持中文可能会看见很多长方形）
+（如果你终端不支持中文可能会看见很多长方形）<br>
+url的地方输入exit是退出<br>
 
 比如<br>
 https://www.esjzone.cc/detail/1585970655.html<br>
