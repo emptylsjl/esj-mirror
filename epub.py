@@ -4,7 +4,6 @@ import random
 import shutil
 import sys
 import time
-from zipfile import ZipFile
 import requests
 from datetime import datetime
 
