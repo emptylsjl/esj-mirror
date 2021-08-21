@@ -25,7 +25,5 @@
 最后的话部分书本来就没章节所以epub多半只有一个cover<br>
 （还有关于繁简转换，opencc慢到离天下之大谱，我回头换其他的试试）<br>
 <br>
-mega : <a href="https://mega.nz/folder/uFwTxSxR#E2MoflyOjO_zdJcv3wSa4Q">https://mega.nz/folder/uFwTxSxR#E2MoflyOjO_zdJcv3wSa4Q</a><br>
-坚果 ：<a herf="https://www.jianguoyun.com/p/DUCOb94QxPWFCBids4cE">https://www.jianguoyun.com/p/DUCOb94QxPWFCBids4cE (访问密码：s8PnZy)</a>
-（坚果暂时缺5本因为每月上传数量有限制）
+链接放到epub详情txt底部了
  
