@@ -1,10 +1,8 @@
 import os
-import json
-import random
 import shutil
 import sys
 import time
-import requests
+import zipfile
 from datetime import datetime
 
 title = '...'
@@ -225,7 +223,7 @@ def epub_chap_main_text(main_content_tuple: tuple, div_class: str) -> str:
 def epub_content_cover(content_name_dict: dict) -> str:
     text = '<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.lls.org/2007/ops" xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="zh-CN">\n<head>\n    <link href="../Styles/style.css" rel="stylesheet" type="Text/css"/>\n    <title>Cover</title>\n</head>\n\n<body>\n    <div style="text-align: center; padding: 0pt; margin: 0pt;">\n        <svg xmlns="http://www.w3.org/2000/svg" height="100%" preserveAspectRatio="xMidYMid meet" version="1.1" viewBox="0 0 1804 2560" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink">\n            <image width="1804" height="2560" xlink:href="../Images/cover.jpg"/>\n        </svg>\n   </div>\n'
     try:
-        text += '    <div class="title" style="margin: 5em 0em;">\n        <p class="h2" style="margin: 0;">' + content_name_dict['content_info']['title'] + '</p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06">author／</span><span class="tbox">' + content_name_dict['content_info']['author'] + '</span></p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06">illus／</span><span class="tbox">' + illus + '</span></p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06">' + date_creation.__str__() + '</span></p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06"><a href="' + content_name_dict['content_info']['raw_url'] + ">' + content_name_dict['content_info']['raw_url'] + '</a></span></p>\n    </div>\n'
+        text += '    <div class="title" style="margin: 5em 0em;">\n        <p class="h2" style="margin: 0;">' + content_name_dict['content_info']['title'] + '</p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06">author／</span><span class="tbox">' + content_name_dict['content_info']['author'] + '</span></p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06">illus／</span><span class="tbox">' + illus + '</span></p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06">' + date_creation.__str__() + '</span></p>\n        <p class="center" style="margin: 2em 0 0 0.3em; line-height: 1em;"><span class="em06"><a href="' + content_name_dict['content_info']['raw_url'] + '">' + content_name_dict['content_info']['raw_url'] + '</a></span></p>\n    </div>\n'
         intro = ''
         for i in content_name_dict['content_info']['intro']:
             intro += '        <p class="intro">' + i + '</p>\n'
@@ -277,7 +275,7 @@ def epub_create(content_name_dict: dict, path):
     file_write(path + "epub/OEBPS/content.opf", epub_opf(content_name_dict))
     file_write(path + "epub/OEBPS/toc.ncx", epub_toc(content_name_dict))
     css = '.body{`	padding: 0%;`	margin-top: 0%;`	margin-bottom: 0%;`	margin-left: 1%;`	margin-right: 1%;`	line-height: 130%;`	text-align: justify;`}`.h1{`	font-size: 1.8em;`	line-height: 120%;`	text-align: center;`	font-weight: bold;`	margin-top: 0.1em;`	margin-bottom: 0.4em;`}`.h2{`	font-size: 1.5em;`	line-height: 120%;`	text-align: center;`	font-weight: bold;`	margin-top: 0.3em;`	margin-bottom: 0.5em;`}`.h3{`	font-size: 1.4em;`	line-height: 120%;`	text-indent: 0em;`	font-weight: bold;`	margin-top: 0.5em;`	margin-bottom: 0.2em;`}`.div{`	margin: 0px;`	padding: 0px;`	text-align: justify;`}`.p{`	text-indent: 2em;`	display: block;`	line-height: 1.3em;`	margin-top: 0.4em;`	margin-bottom: 0.4em;`}`.illus{`	text-indent: 0em;`	text-align: center;`}`.cover{`	margin: 0em;`	padding: 0em;`	text-indent: 0em;`	text-align: center;`}`.right{`	text-indent: 0em;`	text-align: right;`}`.left{`	text-indent: 0em;`	text-align: left;`}`.center{`	text-indent: 0em;`    text-align: center;`}`.bold{`    font-weight: bold;`}`.intro{`    font-size: 0.8em;`	text-indent: 0em;`	line-height: 1.0em;`	margin-top: 0.2em;`	margin-bottom: 0.2em;`}`.em06{`    font-size: 0.6em;`}`.em08{`    font-size: 0.8em;`}`.em12{`    font-size: 1.2em;`}`.em14{`    font-size: 1.4em;`}`.em16{`    font-size: 1.6em;`}`.em18{`    font-size: 1.8em;`}`.em20{`    font-size: 2em;`}`/* @font-face{`    font-family: "title";`    src: url(../Fonts/title.ttf);`}`.title{`    font-family: title;`} */`.chap{`    font-size: 0.8em;`	margin: 1em 0 -0.8em 0em;`}`.text1{`	text-indent: 0em;`	text-align: left;`	text-decoration: none;`    margin: 0.9em -0.8;``}`.co0{`	color: rgb(121, 124, 106);`}`.co1{`	color: #7B6CB1;`}`.co2{`	color: #7ECDF4;`}`.co3{`	color: #FFF;`}`'
-    css.translate(css.maketrans("`", "\n"))
+    css = css.translate(css.maketrans("`", "\n"))
     file_write(path + "epub/OEBPS/Styles/style.css", css)
     for i in content_name_dict["content_main"].items():
         if i[0] == "cover":
@@ -286,15 +284,26 @@ def epub_create(content_name_dict: dict, path):
             file_write(path + "epub/OEBPS/Text/" + i[0] + ".xhtml", epub_chap_main_text(i, "chap"))
     epub_img_write(path + "epub/OEBPS/Images/", content_name_dict)
 
-    
-def epub_7z(path, des_path, b_title):
-    archive_text = ""
-    archive_text += '' + path + 'epub/META-INF\n'
-    archive_text += '' + path + 'epub/OEBPS\n'
-    archive_text += '' + path + 'epub/mimetype'
-    file_write(path + "/7z_list.txt", archive_text)
-    os_input = '7z a -tzip "' + des_path + "/" + b_title + '.epub" @' + path + "/" + '7z_list.txt'
-    os.system(os_input)
+
+def epub_dir(path, epub):
+    # ziph is zipfile handle
+    if os.path.isfile(path):
+        aa = os.path.basename(path)
+        epub.write(path, arcname=aa)
+        return
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            epub.write(os.path.join(root, file),
+                       os.path.relpath(os.path.join(root, file),
+                                       os.path.join(path, '..')))
+
+
+def epub_zip(dir_list, name):
+    epub = zipfile.ZipFile(name, 'w', zipfile.ZIP_DEFLATED)
+    for dir in dir_list:
+        epub_dir(dir, epub)
+    epub.close()
+
 
 # def build():
 def build(c_dict, book_path):
@@ -304,18 +313,19 @@ def build(c_dict, book_path):
         try:
             shutil.rmtree(book_path + "epub")
         except:
-            print(sys.exc_info()[1])
+            print("")
+            # print(sys.exc_info()[1])
 
         epub_content_main_str_iterate(c_dict)
         epub_var_global(c_dict)
         epub_create(c_dict, book_path)
 
-        # try:
-        #     des_path = path
-        #     epub_7z(path, des_path, title)
-        # except:
-        #     print(sys.exc_info()[1])
+        a = os.listdir(book_path + 'epub')
+        for i in range(len(a)):
+            a[i] = book_path + 'epub/' + a[i]
 
+        epub_zip(a, book_path + title+'.epub')
+        print("epub created")
         print("--- %s seconds ---" % (time.time() - s_t))
 
     except:
