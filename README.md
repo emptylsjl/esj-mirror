@@ -10,6 +10,7 @@
 换回builtin lib把7z换掉了<br>
 不过还没想好放哪里，先传了mega和坚果云，度盘这辈子都不会用的，onedrive/谷歌盘大陆不行，蓝奏账号也无，其他盘又离谱<br>
 **链接放到 epub详情.txt 底部了**<br>
+手机端看不见txt点一下view code<br>
 <br>
 <h3>更新<br>
 现在加了一个release，解压有个exe，运行以后输入esj章节网址和电脑路径就能输出epub，详情看code分支</h3>
