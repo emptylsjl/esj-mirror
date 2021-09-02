@@ -9,7 +9,7 @@
 url的地方输入exit是退出<br>
 
 比如<br>
-url : https://www.esjzone.cc/detail/1585970655.html<br>
+esj url : https://www.esjzone.cc/detail/1585970655.html<br>
 write to : C:\ <br>
 <br>
 （这个链接其实是去esj公告不过根据排版来看这姑且也算本书）<br>
