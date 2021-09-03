@@ -286,7 +286,6 @@ def epub_create(content_name_dict: dict, path):
 
 
 def epub_dir(path, epub):
-    # ziph is zipfile handle
     if os.path.isfile(path):
         aa = os.path.basename(path)
         epub.write(path, arcname=aa)
