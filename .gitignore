@@ -1,0 +1,6 @@
+test
+out
+venv
+*.log
+*.epub
+.idea
